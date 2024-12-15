@@ -5,10 +5,11 @@ from pyphys.forces import apply_gravity
 # -- To do: Apply bounding volume hiearchy + raycast for more efficient collision detection
 
 class PhysicsEngine:
-    def __init__(self, bodies: list[Body], gravity = 9.8):
+    def __init__(self, bodies: list[Body], gravity = 9.8, resistance = 0.1):
         self.bodies: list[Body] = bodies
         self._contact_points = []
         self.gravity = gravity
+        self.resistance = resistance
 
     def add(self, body: Body):
         self.bodies.append(body)
@@ -24,6 +25,11 @@ class PhysicsEngine:
         for body in self.bodies:
             if not body.is_static:
                 apply_gravity(body, dt, self.gravity)
+
+    def simulate_fall_resistance(self, dt):
+        for body in self.bodies:
+            if not body.is_static:
+                apply_fall_resistance(body, dt, self.resistance)
 
     # checks collision of all pairs in body list. Result:
     # 1. collision resolution handled by collide method

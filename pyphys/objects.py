@@ -27,11 +27,6 @@ class Body():
         self.min_x, self.min_y = 0, 0
         self.max_x, self.max_y = 0, 0
     
-    def apply_force(self, fx, fy):
-        if not self.is_static:
-            acceleration = Vector2D(fx / self.mass, fy / self.mass)
-            self.velocity += acceleration
-
     def update_aabb(self):
         if self.shape_type == "Polygon":
             # Get the transformed vertices
