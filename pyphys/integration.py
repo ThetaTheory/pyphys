@@ -36,13 +36,10 @@ class SpriteBinder:
         for sprite, body, screen_height in self.bindings:
             # Synchronize position (using body center)
             sprite.rect.center = (body.center.x, screen_height - body.center.y)
-            
             # Rotate the sprite image based on the body's angle
             rotated_image = pygame.transform.rotate(sprite.original_image, math.degrees(body.angle))
-
             # Recalculate the rect after rotation
             rotated_rect = rotated_image.get_rect(center=sprite.rect.center)
-
             # Update the sprite's image and rect
             sprite.image = rotated_image
             sprite.rect = rotated_rect

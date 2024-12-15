@@ -23,8 +23,7 @@ class PhysicsEngine:
     def simulate_gravity(self, dt):
         for body in self.bodies:
             if not body.is_static:
-                gravity_force = body.mass * self.gravity
-                body.apply_force(0, -gravity_force * dt)  # Apply force downward
+                apply_gravity(body, dt, self.gravity)
 
     # checks collision of all pairs in body list. Result:
     # 1. collision resolution handled by collide method
